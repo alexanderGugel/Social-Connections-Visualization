@@ -73,7 +73,6 @@ var randomColorClass = function () {
 var $overlay = $('#social-connections-popup-overlay');
 var $popup = $('#social-connections-popup');
 
-
 $popup.click(function () {
   $overlay.fadeOut();
   $popup.empty();
@@ -108,6 +107,13 @@ var tweetToTile = function (tweet) {
   var $content = $('<div />').addClass('content').html(linkify_entities(tweet));
   $tile.append($content);
 
+  var $author = renderAuthor({
+    url: 'http://twitter.com/' + tweet.user.screen_name,
+    image: tweet.user.profile_image_url,
+    username: tweet.user.screen_name,
+    location: tweet.user.location
+  });
+
   if (tweet.entities && tweet.entities.media && tweet.entities.media.length > 0) {
     $content.empty().addClass('image').css({
       background: 'url(' + tweet.entities.media[0].media_url + ')'
@@ -119,19 +125,15 @@ var tweetToTile = function (tweet) {
       $main.addClass(randomColorClass());
 
       $main.html(
-        '<img src="' + tweet.entities.media[0].media_url + '">'
-      );
+        '<img src="' + tweet.entities.media[0].media_url + '">');
+
+      $main.append($author.clone());
 
       $popup.empty().append($main);
     });
   }
 
-  $tile.append(renderAuthor({
-    url: 'http://twitter.com/' + tweet.user.screen_name,
-    image: tweet.user.profile_image_url,
-    username: tweet.user.screen_name,
-    location: tweet.user.location
-  }));
+  $tile.append($author);
 
   return $tile;
 };
