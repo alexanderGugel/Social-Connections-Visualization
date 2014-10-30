@@ -175,8 +175,4 @@ $(function () {
       socialConnectionsEl.append(vineToTile(data));
     });
   }
-
-
-
-
 });
