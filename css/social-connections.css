@@ -11,6 +11,7 @@
   position: relative;
   word-wrap: break-word;
   background-size: contain;
+  text-align: center;
 }
 #social-connections section.blue {
   background: #2b7391;
@@ -28,11 +29,26 @@
   color: #fff;
   padding: 0.5em;
   line-height: 1.5;
+  position: absolute;
+  text-align: left;
 }
 #social-connections section .content a {
   color: rgba(240,240,240,0.8);
 }
+#social-connections section .icon {
+  position: absolute;
+  height: 2em;
+  color: #fff;
+  z-Index: 9999999;
+  font-size: 3em;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
 #social-connections section .author {
+  text-align: left;
   position: absolute;
   bottom: 0;
   right: 0;

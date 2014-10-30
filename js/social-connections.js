@@ -138,6 +138,8 @@ var vineToTile = function (data) {
     backgroundImage: 'url(' + vine.thumbnailUrl + ')'
   });
 
+  tile.append('<i class="icon ion-play"></i>');
+
   tile.append(
     '<div class="author">' +
       '<a href="http://instagram.com/' + vine.vanityUrls[0] + '">' +
