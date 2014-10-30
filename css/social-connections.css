@@ -1,6 +1,78 @@
+#social-connections,
+#social-connections-popup-overlay,
+#social-connections-popup {
+  box-sizing: border-box;
+}
+#social-connections *,
+#social-connections-popup-overlay *,
+#social-connections-popup *,
+#social-connections *:before,
+#social-connections-popup-overlay *:before,
+#social-connections-popup *:before,
+#social-connections *:after,
+#social-connections-popup-overlay *:after,
+#social-connections-popup *:after {
+  box-sizing: inherit;
+}
+#social-connections .blue,
+#social-connections-popup-overlay .blue,
+#social-connections-popup .blue {
+  background: #2b7391;
+}
+#social-connections .brown,
+#social-connections-popup-overlay .brown,
+#social-connections-popup .brown {
+  background: #8f6f18;
+}
+#social-connections .red,
+#social-connections-popup-overlay .red,
+#social-connections-popup .red {
+  background: #b81b1b;
+}
+#social-connections .green,
+#social-connections-popup-overlay .green,
+#social-connections-popup .green {
+  background: #497b0e;
+}
+#social-connections .author,
+#social-connections-popup-overlay .author,
+#social-connections-popup .author {
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 0.75em;
+}
+#social-connections .author img,
+#social-connections-popup-overlay .author img,
+#social-connections-popup .author img {
+  float: left;
+  width: 48px;
+}
+#social-connections .author div,
+#social-connections-popup-overlay .author div,
+#social-connections-popup .author div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 48px;
+  display: inline-block;
+  padding: 0.5em 0.25em;
+}
+#social-connections .author div a,
+#social-connections-popup-overlay .author div a,
+#social-connections-popup .author div a {
+  display: block;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+#social-connections .author div .location,
+#social-connections-popup-overlay .author div .location,
+#social-connections-popup .author div .location {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9em;
+}
 #social-connections-popup-overlay {
   background: rgba(0,0,0,0.8);
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -8,33 +80,37 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  z-Index: 99999999999;
+  z-index: 999999;
   display: none;
+  text-align: center;
 }
-#social-connections {
-  box-sizing: border-box;
+#social-connections-popup {
+  display: none;
+  z-index: 9999999;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
-#social-connections *,
-#social-connections *:before,
-#social-connections *:after {
-  box-sizing: inherit;
+#social-connections-popup main {
+  margin: 1em auto;
+  text-align: left;
+  max-width: 100%;
+  display: block;
+  width: 250px;
+  border: 2px solid #fff;
+  padding: 1em;
+}
+#social-connections-popup main img {
+  width: 100%;
+}
+#social-connections-popup main .author,
+#social-connections-popup main .content {
+  padding: 0.5em 1em;
 }
 #social-connections section.tile {
   position: relative;
   word-wrap: break-word;
   text-align: center;
-}
-#social-connections section.tile.blue {
-  background: #2b7391;
-}
-#social-connections section.tile.brown {
-  background: #8f6f18;
-}
-#social-connections section.tile.red {
-  background: #b81b1b;
-}
-#social-connections section.tile.green {
-  background: #497b0e;
 }
 #social-connections section.tile .content {
   color: #fff;
@@ -54,7 +130,7 @@
 }
 #social-connections section.tile .content.image {
   cursor: pointer;
-  background-size: contain !important;
+  background-size: cover !important;
 }
 #social-connections section.tile .icon {
   position: absolute;
@@ -75,30 +151,6 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  font-size: 0.75em;
-}
-#social-connections section.tile .author img {
-  float: left;
-  width: 48px;
-}
-#social-connections section.tile .author div {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 48px;
-  display: inline-block;
-  padding: 0.5em 0.25em;
-}
-#social-connections section.tile .author div a {
-  display: block;
-  color: rgba(255,255,255,0.9);
-  text-decoration: none;
-}
-#social-connections section.tile .author div .location {
-  color: rgba(255,255,255,0.7);
-  font-size: 0.9em;
 }
 @media screen and (max-width: 35.49em) {
   #social-connections section {

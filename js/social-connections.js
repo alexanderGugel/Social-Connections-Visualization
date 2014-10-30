@@ -71,9 +71,12 @@ var randomColorClass = function () {
 };
 
 var $overlay = $('#social-connections-popup-overlay');
+var $popup = $('#social-connections-popup');
 
-$overlay.click(function () {
+
+$popup.click(function () {
   $overlay.fadeOut();
+  $popup.empty();
 });
 
 var tweetPopup = function (tweet) {
@@ -111,7 +114,15 @@ var tweetToTile = function (tweet) {
     });
     $content.click(function () {
       $overlay.fadeIn();
+      $popup.fadeIn();
+      $main = $('<main />');
+      $main.addClass(randomColorClass());
 
+      $main.html(
+        '<img src="' + tweet.entities.media[0].media_url + '">'
+      );
+
+      $popup.empty().append($main);
     });
   }
 
