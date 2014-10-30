@@ -100,7 +100,6 @@ var tweetToTile = function (tweet) {
 };
 
 var instagramToTile = function (data) {
-  console.log(data);
   var tile = $('<section />');
   tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
 
@@ -118,7 +117,7 @@ var instagramToTile = function (data) {
       '</a>' +
       '<div>' +
         '<a href="http://instagram.com/' + data.data.user.username + '">@' + data.data.user.username + '</a>' +
-        '<span class="location">' + data.data.location + '</span>' +
+        '<span class="location">' + (data.data.location || '') + '</span>' +
       '</div>' +
     '</div>'
   );
@@ -126,6 +125,32 @@ var instagramToTile = function (data) {
   return tile;
 };
 
+var vineToTile = function (data) {
+  var vine = data.data.records[0];
+
+  var tile = $('<section />');
+  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
+
+  var content = $('<div />').addClass('content');
+  tile.append(content);
+
+  tile.css({
+    backgroundImage: 'url(' + vine.thumbnailUrl + ')'
+  });
+
+  tile.append(
+    '<div class="author">' +
+      '<a href="http://instagram.com/' + vine.vanityUrls[0] + '">' +
+        '<img src="' + vine.avatarUrl + '">' +
+      '</a>' +
+      '<div>' +
+        '<a href="http://instagram.com/' + vine.vanityUrls[0] + '">@' + vine.username + '</a>' +
+      '</div>' +
+    '</div>'
+  );
+
+  return tile;
+};
 
 $(function () {
   var socialConnectionsEl = $('#social-connections');
@@ -144,6 +169,14 @@ $(function () {
       socialConnectionsEl.append(instagramToTile(data));
     });
   }
+
+  for (var i = 0; i < socialConnections.vine.length; i++) {
+    $.get('http://api-stuff.azurewebsites.net/api/vine/posts/' + socialConnections.vine[i], function (data) {
+      socialConnectionsEl.append(vineToTile(data));
+    });
+  }
+
+
 
 
 });
