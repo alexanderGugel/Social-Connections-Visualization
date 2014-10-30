@@ -70,7 +70,23 @@ var randomColorClass = function () {
   return colorClasses[Math.floor(Math.random()*colorClasses.length)];
 };
 
+var $overlay = $('#social-connections-popup-overlay');
+
+var showOverlay = function () {
+  $overlay.fadeIn();
+};
+
+var hideOverlay = function () {
+  $overlay.fadeOut();
+};
+
+$overlay.click(function () {
+  hideOverlay();
+});
+
 var tweetPopup = function (tweet) {
+  showOverlay();
+
   var popup = $('<section />');
 
   return popup;
@@ -84,10 +100,14 @@ var tweetToTile = function (tweet) {
   tile.append(content);
 
   if (tweet.entities && tweet.entities.media && tweet.entities.media.length > 0) {
-    tile.css({
+    content.css({
       background: 'url(' + tweet.entities.media[0].media_url + ')'
     });
+    content.addClass('image');
     content.empty();
+    content.click(function () {
+      showOverlay();
+    });
   }
 
   tile.append(
@@ -112,7 +132,7 @@ var instagramToTile = function (data) {
   var content = $('<div />').addClass('content');
   tile.append(content);
 
-  tile.css({
+  content.addClass('image').css({
     backgroundImage: 'url(' + data.data.images.standard_resolution.url + ')'
   });
 
@@ -140,7 +160,7 @@ var vineToTile = function (data) {
   var content = $('<div />').addClass('content');
   tile.append(content);
 
-  tile.css({
+  content.addClass('image').css({
     backgroundImage: 'url(' + vine.thumbnailUrl + ')'
   });
 

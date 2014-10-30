@@ -1,3 +1,16 @@
+#social-connections-popup-overlay {
+  background: rgba(0,0,0,0.8);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-Index: 99999999999;
+  display: none;
+}
 #social-connections {
   box-sizing: border-box;
 }
@@ -9,7 +22,6 @@
 #social-connections section.tile {
   position: relative;
   word-wrap: break-word;
-  background-size: contain !important;
   text-align: center;
 }
 #social-connections section.tile.blue {
@@ -30,15 +42,25 @@
   line-height: 1.5;
   position: absolute;
   text-align: left;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
 }
 #social-connections section.tile .content a {
   color: rgba(240,240,240,0.8);
+}
+#social-connections section.tile .content.image {
+  cursor: pointer;
+  background-size: contain !important;
 }
 #social-connections section.tile .icon {
   position: absolute;
   height: 2em;
   color: #fff;
-  z-Index: 9999999;
+  z-Index: 999;
   font-size: 3em;
   top: 0;
   right: 0;
