@@ -9,6 +9,7 @@
 #social-connections section {
   background: #00f;
   position: relative;
+  word-wrap: break-word;
 }
 #social-connections section.blue {
   background: #2b7391;
@@ -22,6 +23,11 @@
 #social-connections section.green {
   background: #497b0e;
 }
+#social-connections section .content {
+  color: #fff;
+  padding: 0.5em;
+  line-height: 1.5;
+}
 #social-connections section .author {
   position: absolute;
   bottom: 0;
@@ -30,7 +36,6 @@
   background: rgba(0,0,0,0.5);
   color: #fff;
   font-size: 0.75em;
-  word-wrap: break-word;
 }
 #social-connections section .author img {
   float: left;
@@ -41,8 +46,8 @@
   top: 0;
   bottom: 0;
   left: 48px;
-  word-wrap: break-word;
-  padding: 0.25em;
+  display: inline-block;
+  padding: 0.5em 0.25em;
 }
 #social-connections section .author div a {
   display: block;
@@ -55,7 +60,6 @@
 }
 @media screen and (max-width: 35.49em) {
   #social-connections section {
-    background: #00f;
     min-height: 100vw;
   }
 }
@@ -67,5 +71,8 @@
 @media screen and (min-width: 48em) {
   #social-connections section {
     height: 16vw;
+  }
+  #social-connections section .content {
+    font-size: 0.75em;
   }
 }

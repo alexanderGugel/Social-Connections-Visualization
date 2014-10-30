@@ -13,15 +13,28 @@ var randomColorClass = function () {
 };
 
 var tweetToTile = function (tweet) {
+  console.log(tweet);
   var tile = $('<section />');
   tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
 
+  var content = $('<div />').addClass('content');
+  content.text(tweet.text);
+  tile.append(content);
+
+  if (tweet.entities && tweet.entities.media && tweet.entities.media.length > 0) {
+    tile.css({
+      background: 'url(' + tweet.entities.media[0].media_url + ')'
+    });
+  }
+
   tile.append(
     '<div class="author">' +
-      '<img src="' + tweet.user.profile_image_url + '">' +
+      '<a href="http://twitter.com/' + tweet.user.screen_name + '">' +
+        '<img src="' + tweet.user.profile_image_url + '">' +
+      '</a>' +
       '<div>' +
-        '<a href="#">@jennyh</a>' +
-        '<span class="location">Colorado Springs, CO</span>' +
+        '<a href="http://twitter.com/' + tweet.user.screen_name + '">@' + tweet.user.screen_name + '</a>' +
+        '<span class="location">' + tweet.user.location + '</span>' +
       '</div>' +
     '</div>'
   );
