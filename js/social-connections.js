@@ -72,16 +72,8 @@ var randomColorClass = function () {
 
 var $overlay = $('#social-connections-popup-overlay');
 
-var showOverlay = function () {
-  $overlay.fadeIn();
-};
-
-var hideOverlay = function () {
-  $overlay.fadeOut();
-};
-
 $overlay.click(function () {
-  hideOverlay();
+  $overlay.fadeOut();
 });
 
 var tweetPopup = function (tweet) {
@@ -106,7 +98,7 @@ var renderAuthor = function (author) {
   );
 };
 
-var tweetTo$tile = function (tweet) {
+var tweetToTile = function (tweet) {
   var $tile = $('<section />');
   $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
@@ -118,7 +110,8 @@ var tweetTo$tile = function (tweet) {
       background: 'url(' + tweet.entities.media[0].media_url + ')'
     });
     $content.click(function () {
-      showOverlay();
+      $overlay.fadeIn();
+
     });
   }
 
@@ -132,7 +125,7 @@ var tweetTo$tile = function (tweet) {
   return $tile;
 };
 
-var instagramTo$tile = function (data) {
+var instagramToTile = function (data) {
   var $tile = $('<section />');
   $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
@@ -157,7 +150,7 @@ var instagramTo$tile = function (data) {
   return $tile;
 };
 
-var vineTo$tile = function (data) {
+var vineToTile = function (data) {
   var vine = data.data.records[0];
 
   var $tile = $('<section />');
@@ -196,19 +189,19 @@ $(function () {
 
   for (var i = 0; i < socialConnections.twitter.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/twitter/statuses/' + socialConnections.twitter[i], function (data) {
-      socialConnectionsEl.append(tweetTo$tile(data));
+      socialConnectionsEl.append(tweetToTile(data));
     });
   }
 
   for (var i = 0; i < socialConnections.instagram.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/instagram/media/' + socialConnections.instagram[i], function (data) {
-      socialConnectionsEl.append(instagramTo$tile(data));
+      socialConnectionsEl.append(instagramToTile(data));
     });
   }
 
   for (var i = 0; i < socialConnections.vine.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/vine/posts/' + socialConnections.vine[i], function (data) {
-      socialConnectionsEl.append(vineTo$tile(data));
+      socialConnectionsEl.append(vineToTile(data));
     });
   }
 });
