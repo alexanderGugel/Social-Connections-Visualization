@@ -87,9 +87,9 @@ $overlay.click(function () {
 var tweetPopup = function (tweet) {
   showOverlay();
 
-  var popup = $('<section />');
+  var $popup = $('<section />');
 
-  return popup;
+  return $popup;
 };
 
 var renderAuthor = function (author) {
@@ -106,101 +106,109 @@ var renderAuthor = function (author) {
   );
 };
 
-var tweetToTile = function (tweet) {
-  var tile = $('<section />');
-  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
+var tweetTo$tile = function (tweet) {
+  var $tile = $('<section />');
+  $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
-  var content = $('<div />').addClass('content').html(linkify_entities(tweet));
-  tile.append(content);
+  var $content = $('<div />').addClass('content').html(linkify_entities(tweet));
+  $tile.append($content);
 
   if (tweet.entities && tweet.entities.media && tweet.entities.media.length > 0) {
-    content.css({
+    $content.empty().addClass('image').css({
       background: 'url(' + tweet.entities.media[0].media_url + ')'
     });
-    content.addClass('image');
-    content.empty();
-    content.click(function () {
+    $content.click(function () {
       showOverlay();
     });
   }
 
-  tile.append(renderAuthor({
+  $tile.append(renderAuthor({
     url: 'http://twitter.com/' + tweet.user.screen_name,
     image: tweet.user.profile_image_url,
     username: tweet.user.screen_name,
     location: tweet.user.location
   }));
 
-  return tile;
+  return $tile;
 };
 
-var instagramToTile = function (data) {
-  var tile = $('<section />');
-  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
+var instagramTo$tile = function (data) {
+  var $tile = $('<section />');
+  $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
-  var content = $('<div />').addClass('content');
-  tile.append(content);
+  var $content = $('<div />').addClass('content');
+  $tile.append($content);
 
-  content.addClass('image').css({
+  $content.addClass('image').css({
     backgroundImage: 'url(' + data.data.images.standard_resolution.url + ')'
   });
 
-  tile.append(renderAuthor({
+  $content.click(function () {
+    showOverlay();
+  });
+
+  $tile.append(renderAuthor({
     url: 'http://instagram.com/' + data.data.user.username,
     image: data.data.user.profile_picture,
     username: data.data.user.username,
     location: (data.data.location|| '')
   }));
 
-  return tile;
+  return $tile;
 };
 
-var vineToTile = function (data) {
+var vineTo$tile = function (data) {
   var vine = data.data.records[0];
 
-  var tile = $('<section />');
-  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
+  var $tile = $('<section />');
+  $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
-  var content = $('<div />').addClass('content');
-  tile.append(content);
+  var $content = $('<div />').addClass('content');
+  $tile.append($content);
 
-  content.addClass('image').css({
+  $content.addClass('image').css({
     backgroundImage: 'url(' + vine.thumbnailUrl + ')'
   });
 
-  tile.append('<i class="icon ion-play"></i>');
+  var $icon = $('<i class="icon ion-play"></i>');
 
-  tile.append(renderAuthor({
+  $tile.append($icon);
+
+  $icon.click(function () {
+    showOverlay();
+  });
+
+  $tile.append(renderAuthor({
     url: 'http://vine.co/' + vine.vanityUrls[0],
     image: vine.avatarUrl,
     username: vine.username,
     location: ''
   }));
 
-  return tile;
+  return $tile;
 };
 
 $(function () {
   var socialConnectionsEl = $('#social-connections');
   var socialConnections = window.socialConnections;
 
-  var socialConnectionTiles = [];
+  var socialConnection$tiles = [];
 
   for (var i = 0; i < socialConnections.twitter.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/twitter/statuses/' + socialConnections.twitter[i], function (data) {
-      socialConnectionsEl.append(tweetToTile(data));
+      socialConnectionsEl.append(tweetTo$tile(data));
     });
   }
 
   for (var i = 0; i < socialConnections.instagram.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/instagram/media/' + socialConnections.instagram[i], function (data) {
-      socialConnectionsEl.append(instagramToTile(data));
+      socialConnectionsEl.append(instagramTo$tile(data));
     });
   }
 
   for (var i = 0; i < socialConnections.vine.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/vine/posts/' + socialConnections.vine[i], function (data) {
-      socialConnectionsEl.append(vineToTile(data));
+      socialConnectionsEl.append(vineTo$tile(data));
     });
   }
 });
