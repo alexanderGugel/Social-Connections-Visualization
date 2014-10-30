@@ -10,6 +10,7 @@
   background: #00f;
   position: relative;
   word-wrap: break-word;
+  background-size: contain;
 }
 #social-connections section.blue {
   background: #2b7391;

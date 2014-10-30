@@ -71,18 +71,17 @@ var randomColorClass = function () {
 };
 
 var tweetToTile = function (tweet) {
-  console.log(tweet);
   var tile = $('<section />');
   tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
 
-  var content = $('<div />').addClass('content');
-  content.html(linkify_entities(tweet));
+  var content = $('<div />').addClass('content').html(linkify_entities(tweet));
   tile.append(content);
 
   if (tweet.entities && tweet.entities.media && tweet.entities.media.length > 0) {
     tile.css({
       background: 'url(' + tweet.entities.media[0].media_url + ')'
     });
+    content.empty();
   }
 
   tile.append(
@@ -93,6 +92,33 @@ var tweetToTile = function (tweet) {
       '<div>' +
         '<a href="http://twitter.com/' + tweet.user.screen_name + '">@' + tweet.user.screen_name + '</a>' +
         '<span class="location">' + tweet.user.location + '</span>' +
+      '</div>' +
+    '</div>'
+  );
+
+  return tile;
+};
+
+var instagramToTile = function (data) {
+  console.log(data);
+  var tile = $('<section />');
+  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
+
+  var content = $('<div />').addClass('content');
+  tile.append(content);
+
+  tile.css({
+    backgroundImage: 'url(' + data.data.images.standard_resolution.url + ')'
+  });
+
+  tile.append(
+    '<div class="author">' +
+      '<a href="http://instagram.com/' + data.data.user.username + '">' +
+        '<img src="' + data.data.user.profile_picture + '">' +
+      '</a>' +
+      '<div>' +
+        '<a href="http://instagram.com/' + data.data.user.username + '">@' + data.data.user.username + '</a>' +
+        '<span class="location">' + data.data.location + '</span>' +
       '</div>' +
     '</div>'
   );
@@ -112,4 +138,12 @@ $(function () {
       socialConnectionsEl.append(tweetToTile(data));
     });
   }
+
+  for (var i = 0; i < socialConnections.instagram.length; i++) {
+    $.get('http://api-stuff.azurewebsites.net/api/instagram/media/' + socialConnections.instagram[i], function (data) {
+      socialConnectionsEl.append(instagramToTile(data));
+    });
+  }
+
+
 });
