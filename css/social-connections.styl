@@ -1,0 +1,57 @@
+#social-connections
+  box-sizing: border-box
+  *, *:before, *:after
+    box-sizing: inherit
+  section
+    background: blue
+    position: relative
+    &.blue
+      background: rgb(43, 115, 145)
+    &.brown
+      background: rgb(143, 111, 24)
+    &.red
+      background: rgb(184, 27, 27)
+    &.green
+      background: rgb(73, 123, 14)
+    .author
+      position: absolute
+      bottom: 0
+      right: 0
+      left: 0
+      background: rgba(0, 0, 0, 0.5)
+      color: #fff
+      font-size: 0.75em
+      word-wrap: break-word
+      img
+        float: left
+        width: 48px
+      div
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 48px
+        word-wrap: break-word
+        padding: 0.25em
+        a
+          display: block
+          color: rgba(255, 255, 255, 0.9)
+          text-decoration: none
+        .location
+          color: rgba(255, 255, 255, 0.7)
+          font-size: 0.9em
+
+@media screen and (max-width: 35.49em)
+  #social-connections
+    section
+      background: blue
+      min-height: 100vw
+
+@media screen and (min-width: 35.5em)
+  #social-connections
+    section
+      height: 50vw
+
+@media screen and (min-width: 48em)
+  #social-connections
+    section
+      height: 16vw

@@ -1,0 +1,17 @@
+{
+  "name": "social-connections-visualization",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "stylus -w css/social-connections.styl & st -nc & open http://localhost:1337",
+    "build": "stylus css/social-connections.styl"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "st": "^0.5.2",
+    "stylus": "^0.49.2"
+  }
+}

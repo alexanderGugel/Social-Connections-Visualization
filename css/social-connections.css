@@ -1,0 +1,71 @@
+#social-connections {
+  box-sizing: border-box;
+}
+#social-connections *,
+#social-connections *:before,
+#social-connections *:after {
+  box-sizing: inherit;
+}
+#social-connections section {
+  background: #00f;
+  position: relative;
+}
+#social-connections section.blue {
+  background: #2b7391;
+}
+#social-connections section.brown {
+  background: #8f6f18;
+}
+#social-connections section.red {
+  background: #b81b1b;
+}
+#social-connections section.green {
+  background: #497b0e;
+}
+#social-connections section .author {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 0.75em;
+  word-wrap: break-word;
+}
+#social-connections section .author img {
+  float: left;
+  width: 48px;
+}
+#social-connections section .author div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 48px;
+  word-wrap: break-word;
+  padding: 0.25em;
+}
+#social-connections section .author div a {
+  display: block;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+#social-connections section .author div .location {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9em;
+}
+@media screen and (max-width: 35.49em) {
+  #social-connections section {
+    background: #00f;
+    min-height: 100vw;
+  }
+}
+@media screen and (min-width: 35.5em) {
+  #social-connections section {
+    height: 50vw;
+  }
+}
+@media screen and (min-width: 48em) {
+  #social-connections section {
+    height: 16vw;
+  }
+}
