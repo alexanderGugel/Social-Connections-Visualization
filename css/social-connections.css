@@ -6,36 +6,35 @@
 #social-connections *:after {
   box-sizing: inherit;
 }
-#social-connections section {
-  background: #00f;
+#social-connections section.tile {
   position: relative;
   word-wrap: break-word;
-  background-size: contain;
+  background-size: contain !important;
   text-align: center;
 }
-#social-connections section.blue {
+#social-connections section.tile.blue {
   background: #2b7391;
 }
-#social-connections section.brown {
+#social-connections section.tile.brown {
   background: #8f6f18;
 }
-#social-connections section.red {
+#social-connections section.tile.red {
   background: #b81b1b;
 }
-#social-connections section.green {
+#social-connections section.tile.green {
   background: #497b0e;
 }
-#social-connections section .content {
+#social-connections section.tile .content {
   color: #fff;
   padding: 0.5em;
   line-height: 1.5;
   position: absolute;
   text-align: left;
 }
-#social-connections section .content a {
+#social-connections section.tile .content a {
   color: rgba(240,240,240,0.8);
 }
-#social-connections section .icon {
+#social-connections section.tile .icon {
   position: absolute;
   height: 2em;
   color: #fff;
@@ -47,7 +46,7 @@
   left: 0;
   margin: auto;
 }
-#social-connections section .author {
+#social-connections section.tile .author {
   text-align: left;
   position: absolute;
   bottom: 0;
@@ -57,11 +56,11 @@
   color: #fff;
   font-size: 0.75em;
 }
-#social-connections section .author img {
+#social-connections section.tile .author img {
   float: left;
   width: 48px;
 }
-#social-connections section .author div {
+#social-connections section.tile .author div {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -69,12 +68,12 @@
   display: inline-block;
   padding: 0.5em 0.25em;
 }
-#social-connections section .author div a {
+#social-connections section.tile .author div a {
   display: block;
   color: rgba(255,255,255,0.9);
   text-decoration: none;
 }
-#social-connections section .author div .location {
+#social-connections section.tile .author div .location {
   color: rgba(255,255,255,0.7);
   font-size: 0.9em;
 }

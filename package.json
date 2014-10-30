@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "stylus -w css/social-connections.styl & st -nc & open http://localhost:1337",
+    "watch": "stylus -w css/social-connections.styl",
     "build": "stylus css/social-connections.styl"
   },
   "author": "",

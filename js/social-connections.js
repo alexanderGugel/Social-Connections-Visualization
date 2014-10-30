@@ -70,9 +70,15 @@ var randomColorClass = function () {
   return colorClasses[Math.floor(Math.random()*colorClasses.length)];
 };
 
+var tweetPopup = function (tweet) {
+  var popup = $('<section />');
+
+  return popup;
+};
+
 var tweetToTile = function (tweet) {
   var tile = $('<section />');
-  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
+  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
   var content = $('<div />').addClass('content').html(linkify_entities(tweet));
   tile.append(content);
@@ -101,7 +107,7 @@ var tweetToTile = function (tweet) {
 
 var instagramToTile = function (data) {
   var tile = $('<section />');
-  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
+  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
   var content = $('<div />').addClass('content');
   tile.append(content);
@@ -129,7 +135,7 @@ var vineToTile = function (data) {
   var vine = data.data.records[0];
 
   var tile = $('<section />');
-  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6').addClass(randomColorClass());
+  tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
 
   var content = $('<div />').addClass('content');
   tile.append(content);
