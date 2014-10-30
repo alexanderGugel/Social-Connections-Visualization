@@ -67,6 +67,7 @@
   bottom: 0;
   left: 0;
   margin: auto;
+  cursor: pointer;
 }
 #social-connections section.tile .author {
   text-align: left;
