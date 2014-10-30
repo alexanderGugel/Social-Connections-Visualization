@@ -92,6 +92,20 @@ var tweetPopup = function (tweet) {
   return popup;
 };
 
+var renderAuthor = function (author) {
+  return $(
+    '<div class="author">' +
+      '<a href="' + author.url + '">' +
+        '<img src="' + author.image + '">' +
+      '</a>' +
+      '<div>' +
+        '<a href="' + author.url + '">@' + author.username + '</a>' +
+        '<span class="location">' + author.location + '</span>' +
+      '</div>' +
+    '</div>'
+  );
+};
+
 var tweetToTile = function (tweet) {
   var tile = $('<section />');
   tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
@@ -110,17 +124,12 @@ var tweetToTile = function (tweet) {
     });
   }
 
-  tile.append(
-    '<div class="author">' +
-      '<a href="http://twitter.com/' + tweet.user.screen_name + '">' +
-        '<img src="' + tweet.user.profile_image_url + '">' +
-      '</a>' +
-      '<div>' +
-        '<a href="http://twitter.com/' + tweet.user.screen_name + '">@' + tweet.user.screen_name + '</a>' +
-        '<span class="location">' + tweet.user.location + '</span>' +
-      '</div>' +
-    '</div>'
-  );
+  tile.append(renderAuthor({
+    url: 'http://twitter.com/' + tweet.user.screen_name,
+    image: tweet.user.profile_image_url,
+    username: tweet.user.screen_name,
+    location: tweet.user.location
+  }));
 
   return tile;
 };
@@ -136,17 +145,12 @@ var instagramToTile = function (data) {
     backgroundImage: 'url(' + data.data.images.standard_resolution.url + ')'
   });
 
-  tile.append(
-    '<div class="author">' +
-      '<a href="http://instagram.com/' + data.data.user.username + '">' +
-        '<img src="' + data.data.user.profile_picture + '">' +
-      '</a>' +
-      '<div>' +
-        '<a href="http://instagram.com/' + data.data.user.username + '">@' + data.data.user.username + '</a>' +
-        '<span class="location">' + (data.data.location || '') + '</span>' +
-      '</div>' +
-    '</div>'
-  );
+  tile.append(renderAuthor({
+    url: 'http://instagram.com/' + data.data.user.username,
+    image: data.data.user.profile_picture,
+    username: data.data.user.username,
+    location: (data.data.location|| '')
+  }));
 
   return tile;
 };
@@ -166,16 +170,12 @@ var vineToTile = function (data) {
 
   tile.append('<i class="icon ion-play"></i>');
 
-  tile.append(
-    '<div class="author">' +
-      '<a href="http://instagram.com/' + vine.vanityUrls[0] + '">' +
-        '<img src="' + vine.avatarUrl + '">' +
-      '</a>' +
-      '<div>' +
-        '<a href="http://instagram.com/' + vine.vanityUrls[0] + '">@' + vine.username + '</a>' +
-      '</div>' +
-    '</div>'
-  );
+  tile.append(renderAuthor({
+    url: 'http://vine.co/' + vine.vanityUrls[0],
+    image: vine.avatarUrl,
+    username: vine.username,
+    location: ''
+  }));
 
   return tile;
 };
