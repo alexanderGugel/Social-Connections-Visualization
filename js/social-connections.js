@@ -246,6 +246,8 @@ $(function () {
 
     var $newTile = randomElement($tiles);
 
+    $tiles.splice($tiles.indexOf($newTile), 1);
+
     $tile.removeClass('flip in').addClass('flip out').hide();
     $tile.detach();
 
