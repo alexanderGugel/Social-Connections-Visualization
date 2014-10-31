@@ -247,7 +247,7 @@ $(function () {
     var $newTile = randomElement($tiles);
 
     $tile.removeClass('flip in').addClass('flip out').hide();
-    $tile.hide().detach();
+    $tile.detach();
 
     $tiles.push($tile);
 
