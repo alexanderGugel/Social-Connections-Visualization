@@ -244,46 +244,14 @@ $(function () {
     var $container = randomElement($containers);
     var $tile = $container.find('.tile');
 
-    // setTimeout(function () {
-    //   $container.append($tile);
-    // }, 2000);
+    var $newTile = randomElement($tiles);
 
-    // var $newTile = randomElement($tiles);
-    //
-    // $tile.transition({
-    //   perspective: '100px',
-    //   rotateX: '360deg'
-    // }, 250, 'snap');
-    //
-    // // $container.append($newTile);
-    //
-    // setTimeout(function () {
-    //   $tile.detach();
-    // }, 125);
+    $tile.removeClass('flip in').addClass('flip out').hide();
+    $tile.hide().detach();
 
+    $tiles.push($tile);
 
-
-    // $tile.hide();
-
-    // setTimeout(function () {
-    //   var $newTile = randomElement($tiles);
-    //
-    //   $newTile.transition({
-    //     perspective: '100px',
-    //     rotateX: '90deg'
-    //   }, 0, 'snap');
-    //
-    //   $contianer.empty();
-    //   $container.append($newTile);
-    //
-    //   $newTile.transition({
-    //     perspective: '100px',
-    //     rotateX: '180deg'
-    //   }, 250, 'snap');
-    //
-    //
-    //   // $tile.hide();
-    // }, 500);
-
+    $container.append($newTile);
+    $newTile.removeClass('flip out').addClass('flip in').show();
   }, Math.round(Math.random()*3000));
 });
