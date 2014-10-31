@@ -89,7 +89,7 @@ var tweetPopup = function (tweet) {
 var renderAuthor = function (author) {
   return $(
     '<div class="author">' +
-      '<a href="' + author.url + '">' +
+      '<a href="' + author.url + '" class="avatar-container">' +
         '<img src="' + author.image + '">' +
       '</a>' +
       '<div>' +
@@ -167,7 +167,7 @@ var vineToTile = function (data) {
   var vine = data.data.records[0];
 
   var $tile = $('<section />');
-  $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
+  $tile.addClass('tile').addClass(randomColorClass());
 
   var $content = $('<div />').addClass('content');
   $tile.append($content);
@@ -194,27 +194,50 @@ var vineToTile = function (data) {
   return $tile;
 };
 
+var randomElement = function (array) {
+  return array[Math.floor(Math.random()*array.length)];
+};
+
 $(function () {
-  var socialConnectionsEl = $('#social-connections');
+  var $socialConnectionsEl = $('#social-connections');
   var socialConnections = window.socialConnections;
 
-  var socialConnection$tiles = [];
+  var $containers = [];
+
+  for (var i = 0; i < 6; i++) {
+    var $container = $('<div />').addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 container')  ;
+    $containers.push($container);
+    $socialConnectionsEl.append($container);
+  }
+
+  var $tiles = [];
+
+  var addTile = function ($tile) {
+    for (var i = 0; i < $containers.length; i++) {
+      if (!$containers[i][0].hasChildNodes()) {
+        $containers[i].append($tile);
+        return;
+      }
+    }
+    $tiles.push($tile);
+  };
 
   for (var i = 0; i < socialConnections.twitter.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/twitter/statuses/' + socialConnections.twitter[i], function (data) {
-      socialConnectionsEl.append(tweetToTile(data));
+      addTile(tweetToTile(data));
     });
   }
 
   for (var i = 0; i < socialConnections.instagram.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/instagram/media/' + socialConnections.instagram[i], function (data) {
-      socialConnectionsEl.append(instagramToTile(data));
+      addTile(instagramToTile(data));
     });
   }
 
   for (var i = 0; i < socialConnections.vine.length; i++) {
     $.get('http://api-stuff.azurewebsites.net/api/vine/posts/' + socialConnections.vine[i], function (data) {
-      socialConnectionsEl.append(vineToTile(data));
+      addTile(vineToTile(data));
     });
   }
+
 });

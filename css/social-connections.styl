@@ -16,19 +16,28 @@
     background: rgba(0, 0, 0, 0.5)
     color: #fff
     font-size: 0.75em
+    height: 48px
+    position: relative
+    text-align: left
     img
+      padding: 0
       float: left
       width: 48px
+      height: 48px
     div
-      display: inline-block
-      padding: 0.5em 0.25em
+      position: absolute
+      top: 0
+      right: 0
+      float: right
+      width: 100%
+      padding: 0.5em 0.25em 0.25em 52px
       a
         display: block
         color: rgba(255, 255, 255, 0.9)
         text-decoration: none
       .location
         color: rgba(255, 255, 255, 0.7)
-        font-size: 0.9em
+        font-size: 0.75em
 
 #social-connections-popup-overlay
   background: rgba(0, 0, 0, 0.8)
@@ -59,7 +68,7 @@
     img
       padding: 1em
       width: 100%
-    .author, .content
+    .content
       padding: 0.5em 1em
 
 #social-connections
@@ -67,6 +76,8 @@
     position: relative
     word-wrap: break-word
     text-align: center
+    width: 100%
+    height: 100%
     .content
       a
         color: rgba(240, 240, 240, 0.8)
