@@ -43,6 +43,7 @@
   height: 48px;
   position: relative;
   text-align: left;
+  line-height: 1;
 }
 #social-connections .author img,
 #social-connections-popup-overlay .author img,
