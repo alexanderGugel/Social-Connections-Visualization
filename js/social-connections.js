@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * twitter-entities.js
  * This function converts a tweet with "entity" metadata
@@ -100,6 +102,30 @@ var renderAuthor = function (author) {
   );
 };
 
+var tweetOnClick = function (tweet) {
+  return function () {
+    $overlay.fadeIn();
+
+    var $main = $('<main />');
+    $main.addClass(randomColorClass());
+
+    $main.html('<img src="' + tweet.entities.media[0].media_url + '">');
+
+    $main.append(tweetToAuthor(tweet));
+
+    $popup.empty().append($main).fadeIn();
+  };
+};
+
+var tweetToAuthor = function (tweet) {
+  return renderAuthor({
+    url: 'http://twitter.com/' + tweet.user.screen_name,
+    image: tweet.user.profile_image_url,
+    username: tweet.user.screen_name,
+    location: tweet.user.location
+  });
+};
+
 var tweetToTile = function (tweet) {
   var $tile = $('<section />');
   $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
@@ -107,35 +133,25 @@ var tweetToTile = function (tweet) {
   var $content = $('<div />').addClass('content').html(linkify_entities(tweet));
   $tile.append($content);
 
-  var $author = renderAuthor({
-    url: 'http://twitter.com/' + tweet.user.screen_name,
-    image: tweet.user.profile_image_url,
-    username: tweet.user.screen_name,
-    location: tweet.user.location
-  });
-
   if (tweet.entities && tweet.entities.media && tweet.entities.media.length > 0) {
     $content.empty().addClass('image').css({
       background: 'url(' + tweet.entities.media[0].media_url + ')'
     });
-    $content.click(function () {
-      $overlay.fadeIn();
-      $popup.fadeIn();
-      $main = $('<main />');
-      $main.addClass(randomColorClass());
-
-      $main.html(
-        '<img src="' + tweet.entities.media[0].media_url + '">');
-
-      $main.append($author.clone());
-
-      $popup.empty().append($main);
-    });
+    $content.click(tweetOnClick(tweet));
   }
 
-  $tile.append($author);
+  $tile.append(tweetToAuthor(tweet));
 
   return $tile;
+};
+
+var instagramToAuthor = function (data) {
+  return renderAuthor({
+    url: 'http://instagram.com/' + data.data.user.username,
+    image: data.data.user.profile_picture,
+    username: data.data.user.username,
+    location: (data.data.location|| '')
+  });
 };
 
 var instagramToTile = function (data) {
@@ -153,14 +169,18 @@ var instagramToTile = function (data) {
     showOverlay();
   });
 
-  $tile.append(renderAuthor({
-    url: 'http://instagram.com/' + data.data.user.username,
-    image: data.data.user.profile_picture,
-    username: data.data.user.username,
-    location: (data.data.location|| '')
-  }));
+  $tile.append(instagramToAuthor(data));
 
   return $tile;
+};
+
+var vineToAuthor = function (vine) {
+  return renderAuthor({
+    url: 'http://vine.co/' + vine.vanityUrls[0],
+    image: vine.avatarUrl,
+    username: vine.username,
+    location: ''
+  });
 };
 
 var vineToTile = function (data) {
@@ -184,12 +204,7 @@ var vineToTile = function (data) {
     showOverlay();
   });
 
-  $tile.append(renderAuthor({
-    url: 'http://vine.co/' + vine.vanityUrls[0],
-    image: vine.avatarUrl,
-    username: vine.username,
-    location: ''
-  }));
+  $tile.append(vineToAuthor(vine));
 
   return $tile;
 };
