@@ -75,10 +75,14 @@ var randomColorClass = function () {
 var $overlay = $('#social-connections-popup-overlay');
 var $popup = $('#social-connections-popup');
 
-$popup.click(function () {
+var hideOverlay = function () {
   $overlay.fadeOut();
   $popup.empty();
-});
+};
+
+$popup.click(hideOverlay);
+$overlay.click(hideOverlay);
+
 
 var tweetPopup = function (tweet) {
   showOverlay();
@@ -154,6 +158,21 @@ var instagramToAuthor = function (data) {
   });
 };
 
+var instagramOnClick = function (data) {
+  return function () {
+    $overlay.fadeIn();
+
+    // var $main = $('<main />');
+    // $main.addClass(randomColorClass());
+    //
+    // $main.html('<img src="' + tweet.entities.media[0].media_url + '">');
+    //
+    // $main.append(tweetToAuthor(tweet));
+    //
+    // $popup.empty().append($main).fadeIn();
+  };
+};
+
 var instagramToTile = function (data) {
   var $tile = $('<section />');
   $tile.addClass('pure-u-1-1 pure-u-sm-1-2 pure-u-md-1-6 tile').addClass(randomColorClass());
@@ -165,9 +184,7 @@ var instagramToTile = function (data) {
     backgroundImage: 'url(' + data.data.images.standard_resolution.url + ')'
   });
 
-  $content.click(function () {
-    showOverlay();
-  });
+  $content.click(instagramOnClick(data));
 
   $tile.append(instagramToAuthor(data));
 
@@ -181,6 +198,21 @@ var vineToAuthor = function (vine) {
     username: vine.username,
     location: ''
   });
+};
+
+var vineOnClick = function (vine) {
+  return function () {
+    $overlay.fadeIn();
+
+    // var $main = $('<main />');
+    // $main.addClass(randomColorClass());
+    //
+    // $main.html('<img src="' + tweet.entities.media[0].media_url + '">');
+    //
+    // $main.append(tweetToAuthor(tweet));
+    //
+    // $popup.empty().append($main).fadeIn();
+  };
 };
 
 var vineToTile = function (data) {
@@ -200,9 +232,7 @@ var vineToTile = function (data) {
 
   $tile.append($icon);
 
-  $icon.click(function () {
-    showOverlay();
-  });
+  $icon.click(vineOnClick(vine));
 
   $tile.append(vineToAuthor(vine));
 
