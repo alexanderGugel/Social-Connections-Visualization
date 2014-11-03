@@ -75,12 +75,12 @@ var randomColorClass = function () {
 var $overlay = $('#social-connections-popup-overlay');
 var $popup = $('#social-connections-popup');
 
-var hideOverlay = function () {
+var hideOverlay = function (event) {
   $overlay.fadeOut();
   $popup.empty();
 };
 
-$overlay.click(hideOverlay);
+$popup.on('click', '.close', hideOverlay);
 
 var beautifyDate = function (date) {
   if (typeof date === 'string') {
@@ -90,14 +90,6 @@ var beautifyDate = function (date) {
   return month[date.getMonth()] + ' ' + date.getDay();
 };
 
-
-var tweetPopup = function (tweet) {
-  showOverlay();
-
-  var $popup = $('<section />');
-
-  return $popup;
-};
 
 var renderAuthor = function (author) {
   return $(
@@ -120,7 +112,9 @@ var tweetOnClick = function (tweet) {
     var $main = $('<main />');
     $main.addClass(randomColorClass());
 
-    $main.html('<img src="' + tweet.entities.media[0].media_url + '">');
+    $main.append('<span class="close">✖</span>');
+
+    $main.append('<img src="' + tweet.entities.media[0].media_url + '">');
 
     $main.append(tweetToAuthor(tweet));
 
