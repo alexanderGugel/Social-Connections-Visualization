@@ -80,8 +80,15 @@ var hideOverlay = function () {
   $popup.empty();
 };
 
-$popup.click(hideOverlay);
 $overlay.click(hideOverlay);
+
+var beautifyDate = function (date) {
+  if (typeof date === 'string') {
+    date = new Date(date);
+  }
+  var month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return month[date.getMonth()] + ' ' + date.getDay();
+};
 
 
 var tweetPopup = function (tweet) {
@@ -116,6 +123,9 @@ var tweetOnClick = function (tweet) {
     $main.html('<img src="' + tweet.entities.media[0].media_url + '">');
 
     $main.append(tweetToAuthor(tweet));
+
+    $main.append('<p>' + linkify_entities(tweet) + '</p>');
+    $main.append('<div class="date">' + beautifyDate(tweet.created_at) + '</div>');
 
     $popup.empty().append($main).fadeIn();
   };
