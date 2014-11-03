@@ -217,7 +217,7 @@
       $main.append('<span class="close">✖</span>');
 
       $main.append(
-        '<video autoplay controls><source src="' +
+        '<video controls><source src="' +
         vine.videoUrl +
         '" type="video/mp4"></video>'
       );
@@ -227,6 +227,8 @@
       $main.append('<div class="date">' + beautifyDate(vine.created) + '</div>');
 
       $popup.empty().append($main).fadeIn();
+
+      $main.find('video')[0].play();
     };
   };
 
