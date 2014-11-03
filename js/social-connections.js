@@ -77,6 +77,9 @@ var $popup = $('#social-connections-popup');
 
 var hideOverlay = function (event) {
   $overlay.fadeOut();
+  var $video = $popup.find('video')[0];
+  $video && $video.pause();
+
   $popup.empty();
 };
 
@@ -207,14 +210,22 @@ var vineOnClick = function (vine) {
   return function () {
     $overlay.fadeIn();
 
-    // var $main = $('<main />');
-    // $main.addClass(randomColorClass());
-    //
-    // $main.html('<img src="' + tweet.entities.media[0].media_url + '">');
-    //
-    // $main.append(tweetToAuthor(tweet));
-    //
-    // $popup.empty().append($main).fadeIn();
+    var $main = $('<main />');
+    $main.addClass(randomColorClass())
+
+    $main.append('<span class="close">✖</span>');
+
+    $main.append(
+      '<video autoplay controls><source src="' +
+      vine.videoUrl +
+      '" type="video/mp4"></video>'
+    );
+
+    $main.append(vineToAuthor(vine));
+    $main.append('<p>' + $('<div />').text(vine.description).html() + '</p>');
+    $main.append('<div class="date">' + beautifyDate(vine.created) + '</div>');
+
+    $popup.empty().append($main).fadeIn();
   };
 };
 

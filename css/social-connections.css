@@ -112,6 +112,7 @@
   cursor: pointer;
   color: #fff;
 }
+#social-connections-popup main video,
 #social-connections-popup main img {
   padding: 1em;
   width: 100%;
